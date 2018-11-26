@@ -55,11 +55,13 @@
       <form action="/" id="loginForm">
         <div class="form-group mt-3">
           <label for="inputEmail" class="sr-only">Email address</label>
-          <input type="email" class="form-control" id="inputEmail" aria-describedby="email" placeholder="Enter email">
+          <input type="email" class="form-control" id="inputEmail" placeholder="Enter email">
+          <p class="check-value" id="idCheckText">이메일을 입력해주세요.</p>
         </div>
         <div class="form-group">
           <label for="inputPassword" class="sr-only">Password</label>
           <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+          <p class="check-value" id="passwordCheckText">비밀번호를 입력해주세요.</p>
         </div>
         <div class="text-right">
           <button type="submit" class="btn btn-primary">Submit</button>
@@ -95,7 +97,7 @@
   var openBtns = document.querySelectorAll('.js-modal-open');
   openBtns.forEach(function (btn) {
     btn.addEventListener('click', function(e){
-      var t = e.target;
+      let t = e.target;
 
       if(t.innerHTML === 'Login'){
         openModal('로그인 해주세요.');
@@ -112,6 +114,78 @@
       closeModal();
     });
   });
+
+  // document.getElementById('btnModalClose').addEventListener('click', function(){
+  //   closeModal();
+  // });
+
+  // 폼 submit
+  var loginForm = document.getElementById('loginForm');
+  var emailInput = document.getElementById('inputEmail');
+  var passwordInput = document.getElementById('inputPassword');
+  var idCheck = document.getElementById('idCheckText');
+  var pwCheck = document.getElementById('passwordCheckText');
+  //숙제3. 함수를 만들지말고 addEventListener를 이용해 공백체크 기능을 만들어보세요. (구글검색필요)
+  loginForm.addEventListener('submit', function(e){
+    console.log(e);
+
+    // 이메일 공백일 경우,
+    if(emailInput.value === ''){
+      // e.preventDefault() 넣게되면 submit 이 안된다.
+      e.preventDefault();
+      // e.preventDefault() - html의 기본동작을 막는다. submit, link등
+      // e.stopPropagation() - 부모요소로 이벤트 전파(버블링)을 막는다.
+
+      //숙제1. email 입력란이 공백일 경우 "이메일입력하세요"라는 안내문이 입력란 밑에 표시되도록 만들어보세요.
+      idCheck.style.display = 'block';
+      emailInput.style.borderColor = 'red';
+      emailInput.focus();
+      return false; // event 빠져나감.
+    }
+
+    // 비밀번호 공백일 경우
+    if(passwordInput.value === ''){
+      // e.preventDefault() 넣게되면 submit 이 안된다.
+      e.preventDefault();
+      // e.preventDefault() - html의 기본동작을 막는다. submit, link등
+      // e.stopPropagation() - 부모요소로 이벤트 전파(버블링)을 막는다.
+
+      //숙제2. 이메일뿐만 아니라 비밀번호입력란까지 공백 검사하려면?
+      pwCheck.style.display = 'block';
+      passwordInput.style.borderColor = 'red';
+      passwordInput.focus();
+      return false; // event 빠져나감.
+    }
+  });
+
+  // 입력시 경고창 사라짐
+  emailInput.addEventListener('keypress', function(){
+    if(idCheck.style.display === 'block'){
+      idCheck.style.display = 'none';
+      emailInput.style.borderColor = '#ced4da';
+    }
+  });
+
+  // 입력시 경고창 사라짐
+  passwordInput.addEventListener('keypress', function(){
+    if(pwCheck.style.display === 'block'){
+      pwCheck.style.display = 'none';
+      passwordInput.style.borderColor = '#ced4da';
+    }
+  });
+
+  // 법카별제 함수
+  // function cardPayFunction() {
+  //   if(payment <= 5000){
+  //     return '승인';
+  //   }else{
+  //     return '거절';
+  //   }
+  // }
+  //
+  // var payment = 6000;
+  // cardPayFunction();
+
 </script>
 </body>
 </html>
