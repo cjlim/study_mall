@@ -81,8 +81,17 @@
 <script>
   var modal = document.getElementById('modalWrap');
 
+  // modal 필드 초기화.
+  function modalInit(){
+    idCheck.style.display = 'none';
+    pwCheck.style.display = 'none';
+    emailInput.style.borderColor = '#ced4da';
+    passwordInput.style.borderColor = '#ced4da';
+  }
+
   // modal open F
   function openModal(title) {
+    modalInit();
     modal.style.display = 'block';
 
     // 모달창을 열면 제목을 바꿔줌

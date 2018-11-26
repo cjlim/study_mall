@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="main.css">
+
+  <title>Hello, world!</title>
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Shine Shop</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Features</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Pricing</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Disabled</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="jumbotron main-visual">
+    <h1 class="display-4">Hello, world!</h1>
+    <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+    <hr class="my-4">
+    <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+    <button class="btn btn-primary btn-lg js-modal-open">Login</button>
+    <button class="btn btn-primary btn-lg js-modal-open">Sign In</button>
+  </div>
+
+  <!--modal-->
+  <div class="modal-wrap" id="modalWrap">
+    <div class="modal-cont">
+      <h4 id="modalTitle">login</h4>
+      <button type="button" class="close js-modal-close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">×</span>
+      </button>
+      <form action="/" id="loginForm">
+        <div class="form-group mt-3">
+          <label for="inputEmail" class="sr-only">Email address</label>
+          <input type="email" class="form-control" id="inputEmail" placeholder="Enter email">
+          <p class="check-value" id="idCheckText">이메일을 입력해주세요.</p>
+        </div>
+        <div class="form-group">
+          <label for="inputPassword" class="sr-only">Password</label>
+          <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+          <p class="check-value" id="passwordCheckText">비밀번호를 입력해주세요.</p>
+        </div>
+        <div class="text-right">
+          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="button" class="btn btn-secondary js-modal-close" id="btnModalClose">Close</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!--//modal-->
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+<script>
+  var modal = document.getElementById('modalWrap');
+
+  // modal 필드 초기화.
+  function modalInit(){
+    idCheck.style.display = 'none';
+    pwCheck.style.display = 'none';
+    emailInput.style.borderColor = '#ced4da';
+    passwordInput.style.borderColor = '#ced4da';
+  }
+
+  // modal open F
+  function openModal(title) {
+    modalInit();
+    modal.style.display = 'block';
+
+    // 모달창을 열면 제목을 바꿔줌
+    document.getElementById('modalTitle').innerHTML = title;
+  }
+  // modal close F
+  function closeModal() {
+    modal.style.display = 'none';
+  }
+
+  // 모달 오픈 버튼 이벤트
+  var openBtns = document.querySelectorAll('.js-modal-open');
+  openBtns.forEach(function (btn) {
+    btn.addEventListener('click', function(e){
+      let t = e.target;
+
+      if(t.innerHTML === 'Login'){
+        openModal('로그인 해주세요.');
+      } else {
+        openModal('회원가입 해주세요.');
+      }
+    });
+  });
+
+  // 클로즈 버튼 이벤트
+  var closeBtns = document.querySelectorAll('.js-modal-close');
+  closeBtns.forEach(function (btn) {
+    btn.addEventListener('click', function(){
+      closeModal();
+    });
+  });
+
+  // document.getElementById('btnModalClose').addEventListener('click', function(){
+  //   closeModal();
+  // });
+
+  // 폼 submit
+  var loginForm = document.getElementById('loginForm');
+  var emailInput = document.getElementById('inputEmail');
+  var passwordInput = document.getElementById('inputPassword');
+  var idCheck = document.getElementById('idCheckText');
+  var pwCheck = document.getElementById('passwordCheckText');
+  //숙제3. 함수를 만들지말고 addEventListener를 이용해 공백체크 기능을 만들어보세요. (구글검색필요)
+  loginForm.addEventListener('submit', function(e){
+    console.log(e);
+
+    // 이메일 공백일 경우,
+    if(emailInput.value === ''){
+      // e.preventDefault() 넣게되면 submit 이 안된다.
+      e.preventDefault();
+      // e.preventDefault() - html의 기본동작을 막는다. submit, link등
+      // e.stopPropagation() - 부모요소로 이벤트 전파(버블링)을 막는다.
+
+      //숙제1. email 입력란이 공백일 경우 "이메일입력하세요"라는 안내문이 입력란 밑에 표시되도록 만들어보세요.
+      idCheck.style.display = 'block';
+      emailInput.style.borderColor = 'red';
+      emailInput.focus();
+      return false; // event 빠져나감.
+    }
+
+    // 비밀번호 공백일 경우
+    if(passwordInput.value === ''){
+      // e.preventDefault() 넣게되면 submit 이 안된다.
+      e.preventDefault();
+      // e.preventDefault() - html의 기본동작을 막는다. submit, link등
+      // e.stopPropagation() - 부모요소로 이벤트 전파(버블링)을 막는다.
+
+      //숙제2. 이메일뿐만 아니라 비밀번호입력란까지 공백 검사하려면?
+      pwCheck.style.display = 'block';
+      passwordInput.style.borderColor = 'red';
+      passwordInput.focus();
+      return false; // event 빠져나감.
+    }
+  });
+
+  // 입력시 경고창 사라짐
+  emailInput.addEventListener('keypress', function(){
+    if(idCheck.style.display === 'block'){
+      idCheck.style.display = 'none';
+      emailInput.style.borderColor = '#ced4da';
+    }
+  });
+
+  // 입력시 경고창 사라짐
+  passwordInput.addEventListener('keypress', function(){
+    if(pwCheck.style.display === 'block'){
+      pwCheck.style.display = 'none';
+      passwordInput.style.borderColor = '#ced4da';
+    }
+  });
+
+  // 법카별제 함수
+  // function cardPayFunction() {
+  //   if(payment <= 5000){
+  //     return '승인';
+  //   }else{
+  //     return '거절';
+  //   }
+  // }
+  //
+  // var payment = 6000;
+  // cardPayFunction();
+
+</script>
+</body>
+</html>
