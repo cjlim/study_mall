@@ -13,30 +13,8 @@
 </head>
 <body>
 
-
-  <div class="modal-wrap" id="modalWrap">
-    <div class="modal-cont">
-      <h4 id="modalTitle">login</h4>
-      <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="closeModal();">
-        <span aria-hidden="true">×</span>
-      </button>
-      <form onsubmit="checkEmail()">
-        <div class="form-group mt-3">
-          <label for="inputEmail" class="sr-only">Email address</label>
-          <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="Enter email">
-        </div>
-        <div class="form-group">
-          <label for="inputPassword" class="sr-only">Password</label>
-          <input type="password" class="form-control" id="inputPassword" placeholder="Password">
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-        <button type="button" class="btn btn-danger" id="btnModalClose">Close</button>
-      </form>
-    </div>
-  </div>
-
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">hahaha</a>
+    <a class="navbar-brand" href="#">Shine Shop</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -63,10 +41,34 @@
     <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
     <hr class="my-4">
     <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-    <button class="btn btn-primary btn-lg js-modal-open" onclick="openModal('Login');">login</button>
-    <button class="btn btn-primary btn-lg" onclick="openModal('Sign In');">sign in</button>
+    <button class="btn btn-primary btn-lg js-modal-open">Login</button>
+    <button class="btn btn-primary btn-lg js-modal-open">Sign In</button>
   </div>
 
+  <!--modal-->
+  <div class="modal-wrap" id="modalWrap">
+    <div class="modal-cont">
+      <h4 id="modalTitle">login</h4>
+      <button type="button" class="close js-modal-close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">×</span>
+      </button>
+      <form action="/" id="loginForm">
+        <div class="form-group mt-3">
+          <label for="inputEmail" class="sr-only">Email address</label>
+          <input type="email" class="form-control" id="inputEmail" aria-describedby="email" placeholder="Enter email">
+        </div>
+        <div class="form-group">
+          <label for="inputPassword" class="sr-only">Password</label>
+          <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+        </div>
+        <div class="text-right">
+          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="button" class="btn btn-secondary js-modal-close" id="btnModalClose">Close</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!--//modal-->
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -75,64 +77,41 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
 <script>
-  //스크립트 입력
-  let modal = document.getElementById('modalWrap');
+  var modal = document.getElementById('modalWrap');
 
-  document.getElementById('btnModalClose').addEventListener('click', function(){
-    closeModal();
-  });
+  // modal open F
   function openModal(title) {
     modal.style.display = 'block';
 
     // 모달창을 열면 제목을 바꿔줌
     document.getElementById('modalTitle').innerHTML = title;
   }
+  // modal close F
   function closeModal() {
     modal.style.display = 'none';
   }
 
-  // if(3 > 1){
-  //   console.log("맞았어요")
-  // }
-  //
-  // if(3 > 1){
-  //   console.log("맞았어요")
-  // }else{
-  //   console.log("틀렸어요")
-  // }
+  // 모달 오픈 버튼 이벤트
+  var openBtns = document.querySelectorAll('.js-modal-open');
+  openBtns.forEach(function (btn) {
+    btn.addEventListener('click', function(e){
+      var t = e.target;
 
+      if(t.innerHTML === 'Login'){
+        openModal('로그인 해주세요.');
+      } else {
+        openModal('회원가입 해주세요.');
+      }
+    });
+  });
 
-  // 폼 검사
-  // function testForm(){
-  //   return checkEmail();
-  // }
-
-  var email = document.getElementById('inputEmail');
-
-  function checkEmail(){
-    // if(email.value === ''){
-    //   return false;
-    // }else{
-    //   return true;
-    // }
-    return false;
-    // 이메일 공백이 있으면 리턴 false
-    // 이메일 공백이 없으면 리턴 true
-  }
-  // function testFunction(p) {
-  //   if(p <= 5000){
-  //     return '승인';
-  //   }else{
-  //     return '거절';
-  //   }
-  // }
-  //
-  // var payment = 6000;
-  // testFunction(payment);
-
-
-
-
+  // 클로즈 버튼 이벤트
+  var closeBtns = document.querySelectorAll('.js-modal-close');
+  closeBtns.forEach(function (btn) {
+    btn.addEventListener('click', function(){
+      closeModal();
+    });
+  });
 </script>
 </body>
 </html>
