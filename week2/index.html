@@ -45,6 +45,80 @@
     <button class="btn btn-primary btn-lg js-modal-open">Sign In</button>
   </div>
 
+  <div class="container">
+    <div class="row" id="mainProduct">
+
+      <div class="col-md-4">
+        <div class="card">
+          <img class="card-img-top" src="img/img01.jpeg" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card">
+          <img class="card-img-top" src="img/img02.jpeg" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card">
+          <img class="card-img-top" src="img/img03.jpeg" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    var products = [
+      {
+        id: 1,
+        price: 299,
+        img: 'img/img01.jpeg',
+        title: 'Blossom Dress',
+        text: "Do you like some random yellow stuff? Here's one for you."
+      },
+      {
+        id: 2,
+        price: 199,
+        img: 'img/img02.jpeg',
+        title: 'Springfield Shirt',
+        text: "Stole it from my dad."
+      },
+      {
+        id: 3,
+        price: 399,
+        img: 'img/img03.jpeg',
+        title: 'Black Monastery',
+        text: "The best beer comes from the monastery."
+      }];
+
+    //document.getElementById('mainProduct')
+
+    document.getElementsByClassName('card-title')[0].innerHTML = products[0].title;
+    document.getElementsByClassName('card-text')[0].innerHTML = products[0].text;
+
+    //제목을 products의 products[0].title 로 바꿔줌
+
+  </script>
+
+
+
   <!--modal-->
   <div class="modal-wrap" id="modalWrap">
     <div class="modal-cont">
