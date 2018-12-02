@@ -110,10 +110,52 @@
 
     //document.getElementById('mainProduct')
 
-    document.getElementsByClassName('card-title')[0].innerHTML = products[0].title;
-    document.getElementsByClassName('card-text')[0].innerHTML = products[0].text;
 
     //제목을 products의 products[0].title 로 바꿔줌
+    //내용을 products의 products[0].text 로 바꿔줌
+    document.getElementsByClassName('card-title')[0].innerHTML = products[0].title;
+    //document.getElementsByClassName('card-text')[0].innerHTML = products[0].text;
+    document.querySelectorAll('.card-text')[0].innerHTML = products[0].text;
+
+
+    //데이터 정렬
+    // 가격순, 이름순 등..
+    var array = [3, 5, 6, 2, 1];
+
+    array.sort(function(a, b){
+      // 내림차순?
+      //return a - b;
+      // 오름차순?
+      return b - a;
+    });
+    console.log(array);
+
+    var array2 = ['가', '나', '다', '마', '라'];
+
+    array2.sort();
+    console.log(array2);
+
+    array2.sort(function (a, b) {
+      if(a < b){
+        return 1;
+      }else{
+        return -1;
+      }
+    });
+    console.log(array2);
+
+    // map : 새로운 array 만듦. (기존배열은 수정하지 않음.)
+    var array3 = array.map(function (d){
+      return d + 2;
+    });
+    console.log(array3);
+
+
+    // filter : 새로운 array 만듦.
+    var array4 = array.filter(function (d){
+      return d > 3;
+    });
+    console.log(array4);
 
   </script>
 
