@@ -253,6 +253,23 @@
     });
   });
 
+  //모달창의 검은 배경을 누르면 모달창이 닫힘
+  modal.addEventListener('click', function(e){
+    // e.target; // 현재 클릭한 html요소
+    // e.currentTarget; // 현재 이벤트 요소 === this
+    //
+    // console.log(e.target)
+    // console.log(e.currentTarget)
+
+    // e.stopPropagation(); // 버블링 막기
+    // e.preventDefault(); // 기본동작 막기
+    //addEventListener 의 버블링으로 어느부분을 클릭해도 닫힘.
+
+    // 현재 클릭한 html이 배경일 경우에만, 닫힘
+    if(e.target !== this) return; //if(e.target !== e.currentTarget) return;
+    closeModal();
+  });
+
   // 폼 submit
   var loginForm = document.getElementById('loginForm');
   var emailInput = document.getElementById('inputEmail');
