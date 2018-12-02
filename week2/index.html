@@ -108,18 +108,29 @@
         text: "The best beer comes from the monastery."
       }];
 
-    //document.getElementById('mainProduct')
 
+    // 가격순 정렬 : 기존배열의 순서를 바꿔줌
+    products.sort(function(a, b){
+      console.log(a);
+      console.log(b);
+      return a.price - b.price;
+    });
+
+    console.log(products)
 
     //제목을 products의 products[0].title 로 바꿔줌
     //내용을 products의 products[0].text 로 바꿔줌
-    document.getElementsByClassName('card-title')[0].innerHTML = products[0].title;
+    // document.getElementsByClassName('card-title')[0].innerHTML = products[0].title;
     //document.getElementsByClassName('card-text')[0].innerHTML = products[0].text;
+    document.querySelectorAll('.card-title')[0].innerHTML = products[0].title;
     document.querySelectorAll('.card-text')[0].innerHTML = products[0].text;
+    document.querySelectorAll('.card-title')[1].innerHTML = products[1].title;
+    document.querySelectorAll('.card-text')[1].innerHTML = products[1].text;
+    document.querySelectorAll('.card-title')[2].innerHTML = products[2].title;
+    document.querySelectorAll('.card-text')[2].innerHTML = products[2].text;
 
 
     //데이터 정렬
-    // 가격순, 이름순 등..
     var array = [3, 5, 6, 2, 1];
 
     array.sort(function(a, b){
@@ -156,6 +167,8 @@
       return d > 3;
     });
     console.log(array4);
+
+    //숙제 : 버튼을 눌렀을때 가격순, 이름순 정렬 되도록 수정
 
   </script>
 
