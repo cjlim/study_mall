@@ -95,5 +95,48 @@
 
 
 </script>
+
+
+<script>
+  // 오버워치 오브젝트 예제 - Class 예제
+  // var tracer = {
+  //   q : 'PulseBomb',
+  //   e : 'Recall',
+  //   sayHi : function(){
+  //     console.log('hello');
+  //   }
+  // };
+  //
+  // var hanzo = {
+  //   q : 'DragonStrike',
+  //   e : 'ScatterArrow',
+  //   sayHi : function(){
+  //     console.log('hello');
+  //   }
+  // };
+  // ..... 계속 만들 수 없음..
+
+  // 생성자 함수
+  function Hero(s1, s2){
+    this.q = s1;
+    this.e = s2;
+    this.sayHi = function(){
+      console.log('hello');
+    }
+    //this == Hero에의해 생성될 자식들(instance)
+  }
+
+  var tracer = new Hero('PulseBomb', 'Recall');
+  var hanzo = new Hero('DragonStrike', 'ScatterArrow');
+
+  //새로운 인스턴스 추가
+  Hero.prototype.r = '새로운 스킬';
+
+  var array = [1,2,3,4]; // === var array = new Array(1,2,3,4);
+
+
+</script>
+
+
 </body>
 </html>
