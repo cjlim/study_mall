@@ -72,29 +72,51 @@
 <script src="main.js"></script>
 
 
-
 <script>
-  //복습4. cart.html 페이지에 아까 저장했던 product1을 꺼내서 tr을 만들기
-  //Pseudo code :
-  //1. JSON 데이터를 끄집어내서
-  //2. 데이터를 object자료형으로 다시 바꾸고
-  //3. HTML 템플릿 <tr>어쩌구를 만들고
-  //4. 이걸 jQuery의 append()함수를 써서 원하는 곳에 꽂아넣기
+  function SampleData(id,name,price,quantity,size) {
+    this.id = id;
+    this.name = name;
+    this.price = price;
+    this.quantity = quantity;
+    this.size = size;
+    localStorage.setItem('product'+this.id, JSON.stringify(this));
+    console.log('product'+this.id+' saved');
+  }
 
-  var data = JSON.parse(localStorage.getItem('product1'));
-  console.log(data);
+  var data = new SampleData(1,'Blossom',199,2,'Small');
+  var data2 = new SampleData(2,'Blue Shirt',99,1,'Large');
+  var data3 = new SampleData(3,'Black Dress',159,1,'Medium');
+  var data4 = new SampleData(4,'Red Dress',59,1,'Medium');
 
-  var cartList = `
+
+
+  // 상품 리스트 보이기
+  for(var i = 0; i < 4; i++){
+    var getData = JSON.parse(localStorage.getItem('product' + (i + 1)));
+    var cartList = `
     <tr>
-      <th scope="row">1</th>
-      <td>${data.name}</td>
-      <td>${data.quantity}</td>
-      <td>${data.size}</td>
-      <td>${data.color}</td>
+      <th scope="row">${getData.id}</th>
+      <td>${getData.name}</td>
+      <td>${getData.quantity}</td>
+      <td>${getData.size}</td>
+      <td>${getData.color}</td>
     </tr>
   `;
 
-  $('#cartTable').append(cartList);
+    $('#cartTable').append(cartList);
+  }
+  // var data = JSON.parse(localStorage.getItem('product1'));
+  // console.log(data);
+  //
+  // var cartList = `
+  //   <tr>
+  //     <th scope="row">${data.id}</th>
+  //     <td>${data.name}</td>
+  //     <td>${data.quantity}</td>
+  //     <td>${data.size}</td>
+  //     <td>${data.color}</td>
+  //   </tr>
+  // `;
 </script>
 
 

@@ -2,12 +2,12 @@
 //ul에 addEventListener를 달아줌
 
 // 복습2
-function activeTab(tabs, contents, activeId){
+function activeTab(buttons, contents, activeId){
   for (var i = 0; i < tabs.length; i++){
-    tabs[i].classList.remove('active');
+    buttons[i].classList.remove('active');
     contents[i].classList.remove('show-tab');
   }
-  tabs[activeId].classList.add('active');
+  buttons[activeId].classList.add('active');
   contents[activeId].classList.add('show-tab');
 }
 
@@ -40,7 +40,7 @@ console.log(chamgaja01.name);
 //(문제) console.log(참가자1.gender); 라고 입력하면 '남자'라는 값이 나오도록 모든 참가자의 gender 값에 남자라는 value를 부여해보세요. 단, 치사하게 class 내부 코드를 건들지 맙시다.
 
 MossolNam.prototype.gender = '남자';
-console.log(chamgaja02.gender)
+console.log(chamgaja02.gender);
 
 
 
