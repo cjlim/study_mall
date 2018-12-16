@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="main.css">
+
+  <title>Detail</title>
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">Shine Shop</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Features</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Pricing</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Disabled</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h4 class="text-center mt-4">Details</h4>
+    <hr>
+
+    <div class="row mt-5">
+      <div class="col-md-6">
+        <img src="img/img01.jpeg" alt="" width="100%">
+      </div>
+      <div class="col-md-6">
+        <h4>Blossom Dress</h4>
+        <p>상품 설명</p>
+
+        <form class="mb-3" id="addCartForm">
+          <input type="hidden" value="Blossom Dress">
+          <div class="form-row mb-3">
+            <div class="col">
+              <input type="text" class="form-control" placeholder="수량" id="quantity">
+            </div>
+            <div class="col">
+              <select class="form-control" id="size">
+                <option>Small</option>
+                <option>Medium</option>
+                <option>Large</option>
+              </select>
+            </div>
+            <div class="col">
+              <select class="form-control" id="color">
+                <option>Red</option>
+                <option>Blue</option>
+                <option>Green</option>
+              </select>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-danger" id="addCart">Add to Cart</button>
+
+          <a href="cart.html" class="btn btn-primary">Move to Cart</a>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+  <!--active라는 클래스는 버튼 하이라이트해주는 클래스, show-tab은 탭 내용 보여주는 클래스-->
+  <div class="container mt-5" style="margin-bottom: 500px;">
+    <ul class="list clearfix" id="js-tab-buttons">
+      <li><a class="tab-button" data-id="0">Products</a></li>
+      <li><a class="tab-button active" data-id="1">Information</a></li>
+      <li><a class="tab-button" data-id="2">Shipping</a></li>
+    </ul>
+
+    <div class="tab-content">
+      <p>It's products yo.</p>
+    </div>
+    <div class="tab-content show-tab">
+      <p>No info for you.</p>
+    </div>
+    <div class="tab-content">
+      <p>Shipping costs a lot. I mean A LOT LOT</p>
+    </div>
+
+  </div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+  <script src="main.js"></script>
+
+  <script>
+    document.getElementById('js-tab-buttons').addEventListener('click', function(e){
+      var target = e.target;
+      var tabButtons = document.querySelectorAll('.tab-button');
+      var tabContents = document.querySelectorAll('.tab-content');
+      var activeId = target.dataset.id;
+
+      activeTab(tabButtons, tabContents, activeId);
+    });
+
+    // 복습3
+    // 1. Add to cart 버튼을 눌렀을 때,
+    //	2. 사용자가 입력한 값(수량,색상,사이즈)를 가져와서
+    //	3. object형식의 데이터를 만들고
+    //	4. 이걸 문자(JSON)로 변환해서
+    //	5. localStorage에 product1이라는 key로 저장하기
+    // 크롬 application 탭에 product1이 보이면 성공
+    document.getElementById('addCartForm').addEventListener('submit', function(e){
+      e.preventDefault();
+
+      var pdoductName = e.target[0].value;
+      var quantityField = e.target[1];
+      var sizeField = e.target[2];
+      var colorField = e.target[3];
+
+      var cartData = {
+        name : pdoductName,
+        quantity : quantityField.value || null,
+        size : sizeField.value || null,
+        color :  colorField.value || null,
+      };
+
+      //숙제0. 장바구니 추가할 때 검사한번 거치기
+      if(!cartData.quantity || cartData.quantity <= 0){
+        alert('수량에 1 이상 넣어주세요.');
+        quantityField.focus();
+        return;
+      }
+
+      var dataString = JSON.stringify(cartData);
+      localStorage.setItem('product1', dataString);
+
+      var setData = localStorage.getItem('product1');
+
+      if(dataString === setData){
+        alert('장바구니에 추가 하였습니다.');
+      }
+
+    });
+  </script>
+</body>
+</html>

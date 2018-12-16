@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="main.css">
+
+  <title>Hello, world!</title>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light top-nav">
+  <a class="navbar-brand small-font" href="#">Shine Shop</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Features</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Pricing</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Disabled</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="jumbotron main-visual">
+  <h1 class="display-4">Hello, world!</h1>
+  <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+  <hr class="my-4">
+  <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+  <button class="btn btn-primary btn-lg js-modal-open">Login</button>
+  <button class="btn btn-primary btn-lg js-modal-open">Sign In</button>
+</div>
+
+<div class="container">
+  <div class="text-right mb-3">
+    <button class="btn btn-primary" id="btnSortPrice">가격 낮은 순으로 정렬</button>
+    <button class="btn btn-primary" id="btnSortName">이름순으로 정렬</button>
+    <!--<button class="btn btn-primary" id="btnFilterPrice">200달러 이하 상품만 보기</button>-->
+  </div>
+</div>
+
+<div class="container">
+  <div class="row" id="mainProduct">
+
+    <div class="col-md-4">
+      <div class="card product-item">
+        <img class="card-img-top" src="img/img01.jpeg" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <p class="price">$100</p>
+          <div class="text-right">
+            <a href="detail.html" class="btn btn-primary">Details</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card product-item">
+        <img class="card-img-top" src="img/img02.jpeg" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <p class="price">$100</p>
+          <div class="text-right">
+            <a href="detail.html" class="btn btn-primary">Details</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card product-item">
+        <img class="card-img-top" src="img/img03.jpeg" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <p class="price">$100</p>
+          <div class="text-right">
+            <a href="detail.html" class="btn btn-primary">Details</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <button class="btn btn-danger mt-3" id="addMore">More</button>
+</div>
+
+<script>
+  // 상품 data
+  var products = [
+    {
+      id: 1,
+      price: 299,
+      img: 'img/img01.jpeg',
+      title: 'Blossom Dress',
+      text: "Do you like some random yellow stuff? Here's one for you."
+    },
+    {
+      id: 2,
+      price: 199,
+      img: 'img/img02.jpeg',
+      title: 'Springfield Shirt',
+      text: "Stole it from my dad."
+    },
+    {
+      id: 3,
+      price: 399,
+      img: 'img/img03.jpeg',
+      title: 'Black Monastery',
+      text: "The best beer comes from the monastery."
+    }];
+
+  //가격순으로 정렬
+  document.getElementById('btnSortPrice').addEventListener('click', ()=>{
+    products.sort((a, b)=>{
+      return a.price - b.price;
+    });
+
+    reLoadProduct(products);
+  });
+
+  //이름순으로 정렬
+  document.getElementById('btnSortName').addEventListener('click', ()=>{
+    products.sort((a, b)=>{
+      if(a.title > b.title){
+        return 1;
+      }else{
+        return -1;
+      }
+    });
+
+    reLoadProduct(products);
+  });
+
+  //200달러 이하 상품만 보기
+  // document.getElementById('btnFilterPrice').addEventListener('click', ()=>{
+  //   var filteredProducts = products.filter((a)=>{
+  //     return a.price < 200;
+  //   });
+  //
+  //   reLoadProduct(filteredProducts);
+  //   return false;
+  // });
+
+  //상품 첫번째 제목필드를 가져와서 products[0].title 값을 넣어줌
+  //상품 첫번째 내용필드를 가져와서 products[0].text 값을 넣어줌
+  var productTitle = document.querySelectorAll('.product-item .card-title');
+  var productText = document.querySelectorAll('.product-item .card-text');
+  var productPrice = document.querySelectorAll('.product-item .price');
+  var productImg = document.querySelectorAll('.product-item .card-img-top');
+
+  var reLoadProduct = (product) => {
+    for (let i = 0; i < product.length; i++){
+      productTitle[i].innerHTML = product[i].title;
+      productText[i].innerHTML = product[i].text;
+      productPrice[i].innerHTML = '$ ' + product[i].price;
+      productImg[i].src = product[i].img;
+    }
+  };
+
+  reLoadProduct(products);
+</script>
+
+<!--modal-->
+<div class="modal-wrap" id="modalWrap">
+  <div class="modal-cont">
+    <h4 id="modalTitle">login</h4>
+    <button type="button" class="close js-modal-close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">×</span>
+    </button>
+    <form action="/" id="loginForm">
+      <div class="form-group mt-3">
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input type="email" class="form-control" id="inputEmail" placeholder="Enter email">
+        <p class="check-value" id="idCheckText">이메일을 입력해주세요.</p>
+      </div>
+      <div class="form-group">
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+        <p class="check-value" id="passwordCheckText">비밀번호를 입력해주세요.</p>
+      </div>
+      <div class="text-right">
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="button" class="btn btn-secondary js-modal-close" id="btnModalClose">Close</button>
+      </div>
+    </form>
+  </div>
+</div>
+<!--//modal-->
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script src="main.js"></script>
+
+<script>
+  var modal = document.getElementById('modalWrap');
+  // modal 필드 초기화.
+  function modalInit(){
+    idCheck.style.display = 'none';
+    pwCheck.style.display = 'none';
+    emailInput.style.borderColor = '#ced4da';
+    passwordInput.style.borderColor = '#ced4da';
+  }
+  // modal open F
+  function openModal(title) {
+    modalInit();
+    modal.style.display = 'block';
+    // 모달창을 열면 제목을 바꿔줌
+    document.getElementById('modalTitle').innerHTML = title;
+  }
+  // modal close F
+  function closeModal() {
+    modal.style.display = 'none';
+  }
+  // 모달 오픈 버튼 이벤트
+  var openBtns = document.querySelectorAll('.js-modal-open');
+  openBtns.forEach(function (btn) {
+    btn.addEventListener('click', function(e){
+      let t = e.target;
+      if(t.innerHTML === 'Login'){
+        openModal('로그인 해주세요.');
+      } else {
+        openModal('회원가입 해주세요.');
+      }
+    });
+  });
+  // 클로즈 버튼 이벤트
+  var closeBtns = document.querySelectorAll('.js-modal-close');
+  closeBtns.forEach(function (btn) {
+    btn.addEventListener('click', function(){
+      closeModal();
+    });
+  });
+  // 모달 배경 클릭시 닫힘 (복습 1)
+  modal.addEventListener('click', (e)=>{
+    //e.target(클릭한 html)과 e.currentTarget(이벤트가 적용되는 html === this)이 같으면 닫힘.
+    if(e.target === e.currentTarget){
+      closeModal();
+    }
+  });
+
+  // 폼 submit
+  var loginForm = document.getElementById('loginForm');
+  var emailInput = document.getElementById('inputEmail');
+  var passwordInput = document.getElementById('inputPassword');
+  var idCheck = document.getElementById('idCheckText');
+  var pwCheck = document.getElementById('passwordCheckText');
+  loginForm.addEventListener('submit', function(e){
+    console.log(e);
+    // 이메일 공백일 경우,
+    if(emailInput.value === ''){
+      e.preventDefault();
+      idCheck.style.display = 'block';
+      emailInput.style.borderColor = 'red';
+      emailInput.focus();
+      return false;
+    }
+    // 비밀번호 공백일 경우
+    if(passwordInput.value === ''){
+      e.preventDefault();
+      pwCheck.style.display = 'block';
+      passwordInput.style.borderColor = 'red';
+      passwordInput.focus();
+      return false;
+    }
+  });
+  // 입력시 경고창 사라짐
+  emailInput.addEventListener('keypress', function(){
+    if(idCheck.style.display === 'block'){
+      idCheck.style.display = 'none';
+      emailInput.style.borderColor = '#ced4da';
+    }
+  });
+  // 입력시 경고창 사라짐
+  passwordInput.addEventListener('keypress', function(){
+    if(pwCheck.style.display === 'block'){
+      pwCheck.style.display = 'none';
+      passwordInput.style.borderColor = '#ced4da';
+    }
+  });
+
+
+
+  // ajax
+  document.getElementById('addMore').addEventListener('click', function () {
+    $.ajax({
+      //get
+      type: 'GET',
+      url: 'data.json',
+      dataType: 'json',
+
+      //post 방식은 data를 보내줄 수 있다. 왜?
+      // type: 'POST',
+      // data: {id: 'qwer1234'}
+    }).done(function (data) {
+      // 성공시
+      console.log(data);
+
+      data.forEach(function (d) {
+        var item = `
+        <div class="col-md-4 mt-2">
+          <div class="card product-item">
+            <img class="card-img-top" src="${d.img}" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">${d.name}</h5>
+              <p class="card-text">${d.text}</p>
+              <p class="price">$ ${d.price}</p>
+              <div class="text-right">
+                <a href="detail.html" class="btn btn-primary">Details</a>
+              </div>
+            </div>
+          </div>
+        </div>`;
+
+        $('#mainProduct').append(item)
+      });
+    })
+  });
+</script>
+</body>
+</html>
