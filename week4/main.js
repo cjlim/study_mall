@@ -62,3 +62,20 @@ MossolNam.prototype.sayHi = function(){
 console.log(chamgaja01.sayHi());
 console.log(chamgaja02.sayHi());
 console.log(chamgaja03.sayHi());
+
+
+// 메뉴 투명화
+// 스크롤바를 50px정도 내리면
+// a.navbar-brand 에.small-font 클래스 추가
+
+$(window).on('scroll', function () {
+  var top = $(this).scrollTop();
+  console.log(top);
+  if(top > 50){
+    $('.top-nav').addClass('none-transparent');
+    $('a.navbar-brand').addClass('small-font');
+  }else{
+    $('.top-nav').removeClass('none-transparent');
+    $('a.navbar-brand').removeClass('small-font');
+  }
+});
